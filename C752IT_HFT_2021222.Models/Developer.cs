@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace C752IT_HFT_2021222.Models
 {
     [Table("Developers")]
-    class Developer
+    public class Developer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,8 +32,12 @@ namespace C752IT_HFT_2021222.Models
         [ForeignKey(nameof(Publisher))]
         public int PublisherId { get; set; }
 
-        public Developer()
+        public Developer(int id, string name, int teamSize, int publisherId)
         {
+            Id = id;
+            Name = name;
+            TeamSize = teamSize;
+            PublisherId = publisherId;
             Games = new HashSet<Game>();
         }
     }

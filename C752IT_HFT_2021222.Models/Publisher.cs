@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace C752IT_HFT_2021222.Models
 {
     [Table("Publishers")]
-    class Publisher
+    public class Publisher
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,8 +22,10 @@ namespace C752IT_HFT_2021222.Models
         [JsonIgnore]
         public virtual ICollection<Developer> Developers { get; set; }
 
-        public Publisher()
+        public Publisher(int id, string name)
         {
+            Id = id;
+            Name = name;
             Developers = new HashSet<Developer>();
         }
     }

@@ -11,10 +11,10 @@ namespace C752IT_HFT_2021222.Models
 {
     public enum GameType
     { 
-        FPS, RPG, Adventure, Puzzle, Horror, Looter, Indie 
+        FPS, RPG, Indie, Puzzle, Horror, Looter, Rhythm
     }
     [Table("Games")]
-    class Game
+    public class Game
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -36,6 +36,16 @@ namespace C752IT_HFT_2021222.Models
 
         [ForeignKey(nameof(Developer))]
         public int DeveloperId { get; set; }
+
+        public Game(int id, string title, int price, string description, GameType type, int developerId)
+        {
+            Id = id;
+            Title = title;
+            Price = price;
+            Description = description;
+            Type = type;
+            DeveloperId = developerId;
+        }
     }
 
 
