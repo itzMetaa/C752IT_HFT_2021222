@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\C752IT_HFT_2021222.Logic\C752IT_HFT_2021222.Logic.csproj" />
+    <ProjectReference Include="..\C752IT_HFT_2021222.Models\C752IT_HFT_2021222.Models.csproj" />
+    <ProjectReference Include="..\C752IT_HFT_2021222.Repository\C752IT_HFT_2021222.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
