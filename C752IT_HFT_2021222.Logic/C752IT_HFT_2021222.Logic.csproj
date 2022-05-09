@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.17.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\C752IT_HFT_2021222.Models\C752IT_HFT_2021222.Models.csproj" />
     <ProjectReference Include="..\C752IT_HFT_2021222.Repository\C752IT_HFT_2021222.Repository.csproj" />
   </ItemGroup>
