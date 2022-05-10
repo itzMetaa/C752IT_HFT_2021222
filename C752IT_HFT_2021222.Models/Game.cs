@@ -46,6 +46,18 @@ namespace C752IT_HFT_2021222.Models
             Type = type;
             DeveloperId = developerId;
         }
+
+        public Game(string title, int price, string description, GameType type)
+        {
+            Title = title;
+            Price = price;
+            Description = description;
+            Type = type;
+        }
+
+        public Game()
+        {
+        }
     }
 
 
