@@ -24,10 +24,11 @@ namespace C752IT_HFT_2021222.Models
         public string Title { get; set; }
         [Required]
         public int Price { get; set; }
-        [Required]
+        [Range(0.0,10.0)]
+        public double Rating { get; set; }
+        public int CopiesSold { get; set; }
         [StringLength(200)]
         public string Description { get; set; }
-        [Required]
         public GameType Type { get; set; }
         //Developer link
         [NotMapped]
@@ -42,6 +43,18 @@ namespace C752IT_HFT_2021222.Models
             Id = id;
             Title = title;
             Price = price;
+            Description = description;
+            Type = type;
+            DeveloperId = developerId;
+        }
+
+        public Game(int id, string title, int price, double rating, int copiesSold, string description, GameType type, int developerId)
+        {
+            Id = id;
+            Title = title;
+            Price = price;
+            Rating = rating;
+            CopiesSold = copiesSold;
             Description = description;
             Type = type;
             DeveloperId = developerId;

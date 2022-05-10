@@ -79,18 +79,18 @@ namespace C752IT_HFT_2021222.Repository
 
             modelBuilder.Entity<Game>().HasData(new Game[]
                 {
-                    new Game(1,"Call of Duty: Black Ops III",90,"best zombi",GameType.FPS,3),
-                    new Game(2,"Call of Duty: Black Ops",20,"second legjobb zombi",GameType.FPS,3),
-                    new Game(3,"Call of Duty 5: World at War",15,"og zombik",GameType.FPS,3),
-                    new Game(4,"Call of Duty 4: Modern Warfare ",20,"Legjobb esport",GameType.FPS,1),
-                    new Game(5,"Call of Duty Warzone",60,"fuj battleroyale",GameType.FPS,1),
-                    new Game(6,"Borderlands 2",15,"best game ever frfr ++ Moxxxy sheesh",GameType.Looter,2),
-                    new Game(7,"Escape from Tarkov",40,"best game rn no cap extra daddy Prapor",GameType.FPS,4),
-                    new Game(8,"Elden Ring",60,"down bad npc",GameType.RPG,5),
-                    new Game(9,"Resident Evil Village",50,"vampire mommy",GameType.Horror,6),
-                    new Game(10,"Warframe",0,"space ninjas and alien mommy",GameType.Looter,7),
-                    new Game(11,"HuniePop",10,"waifu dating simulator",GameType.Puzzle,8),
-                    new Game(12,"osu!",0,"rhythm is just a click away",GameType.Rhythm,9),
+                    new Game(1,"Call of Duty: Black Ops III",90,7.3,2000000,"best zombi",GameType.FPS,3),
+                    new Game(2,"Call of Duty: Black Ops",20,7.6,1400000,"second legjobb zombi",GameType.FPS,3),
+                    new Game(3,"Call of Duty 5: World at War",15,8.3,450000,"og zombik",GameType.FPS,3),
+                    new Game(4,"Call of Duty 4: Modern Warfare ",20,9.2,4000000,"Legjobb esport",GameType.FPS,1),
+                    new Game(5,"Call of Duty Warzone",60,7.9,3200000,"fuj battleroyale",GameType.FPS,1),
+                    new Game(6,"Borderlands 2",15,8.2,1100000,"best game ever frfr ++ Moxxxy sheesh",GameType.Looter,2),
+                    new Game(7,"Escape from Tarkov",40,7.5,500000,"best game rn no cap extra daddy Prapor",GameType.FPS,4),
+                    new Game(8,"Elden Ring",60,9.6,7000000,"down bad npc",GameType.RPG,5),
+                    new Game(9,"Resident Evil Village",50,8.4,600000,"vampire mommy",GameType.Horror,6),
+                    new Game(10,"Warframe",0,8.3,30000000,"space ninjas and alien mommy",GameType.Looter,7),
+                    new Game(11,"HuniePop",10,8.1,40000,"waifu dating simulator",GameType.Puzzle,8),
+                    new Game(12,"osu!",0,9,27000000,"rhythm is just a click away",GameType.Rhythm,9),
                 });
         }
     }
