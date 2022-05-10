@@ -11,7 +11,7 @@ namespace C752IT_HFT_2021222.Repository
     public class GameDbContext : DbContext
     {
         public DbSet<Game> Games { get; set; }
-        public DbSet<Developer> Devcelopers { get; set; }
+        public DbSet<Developer> Developers { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
 
         public GameDbContext()

@@ -1,5 +1,4 @@
-﻿using C752IT_HFT_2021222.Repository;
-using System;
+﻿using System;
 
 namespace C752IT_HFT_2021222.Client
 {
@@ -7,7 +6,6 @@ namespace C752IT_HFT_2021222.Client
     {
         static void Main(string[] args)
         {
-            GameDbContext dbContext = new GameDbContext();
             ;
         }
     }
