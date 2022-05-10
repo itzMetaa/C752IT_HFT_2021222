@@ -23,10 +23,10 @@ namespace C752IT_HFT_2021222.Repository
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|game.mdf;Integrated Security=True,MultipleActiveResultSets = true";
+                //string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|game.mdf;Integrated Security=True,MultipleActiveResultSets = true";
                 optionsBuilder
                     .UseLazyLoadingProxies()
-                    .UseSqlServer(conn);
+                    .UseInMemoryDatabase("game");
             }
         }
 
