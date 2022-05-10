@@ -11,22 +11,17 @@ namespace C752IT_HFT_2021222.Client
         static void Main(string[] args)
         {
             var ctx = new GameDbContext();
-            var repo = new GameRepository(ctx);
-            var logic = new GameLogic(repo);
+            var rg = new GameRepository(ctx);
+            var rd = new DeveloperRepository(ctx);
+            var rp = new PublisherRepository(ctx);
 
-            /*
-            Game g = new Game()
-            {
-                Title = "teszt",
-                Price = 30,
+            var lg = new GameLogic(rg);
+            var ld = new DeveloperLogic(rd);
+            var lp = new PublisherLogic(rp);
 
-            };*/
-
-            var item = logic.ReadAll();
-
-            var item2 = logic.GetGameRevenueInfo();
+            var item2 = lg.GetGameRevenueInfo();
             var i = item2.Max(i => i.TotalRevenue);
-            var item3 = logic.GetMostProfitableGame();
+            var item3 = lg.GetMostProfitableGame();
 
             ;
         }

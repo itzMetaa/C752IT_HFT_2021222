@@ -8,9 +8,16 @@ using System.Threading.Tasks;
 
 namespace C752IT_HFT_2021222.Logic
 {
-    class PublisherLogic : IPublisherLogic
+    public class PublisherLogic : IPublisherLogic
     {
+
         IRepository<Publisher> repo;
+
+        public PublisherLogic(IRepository<Publisher> repo)
+        {
+            this.repo = repo;
+        }
+
         public void Create(Publisher item)
         {
             if (item.Name.Length < 3)

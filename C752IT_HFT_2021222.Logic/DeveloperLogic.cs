@@ -8,9 +8,15 @@ using System.Threading.Tasks;
 
 namespace C752IT_HFT_2021222.Logic
 {
-    class DeveloperLogic : IDeveloperLogic
+    public class DeveloperLogic : IDeveloperLogic
     {
         IRepository<Developer> repo;
+
+        public DeveloperLogic(IRepository<Developer> repo)
+        {
+            this.repo = repo;
+        }
+
         public void Create(Developer item)
         {
             if (item.Name.Length < 3)
