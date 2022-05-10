@@ -61,12 +61,34 @@ namespace C752IT_HFT_2021222.Logic
                 .Average(t => t.Price);
         }
 
-        public Game GetMostProfitableGame()
+        public IEnumerable<GameInfo> GetGameRevenueInfo()
         {
-            var q1 = this.repo
-                .ReadAll()
-                .Where(t => t.Price * t.CopiesSold > 0);
-            return q1.Max();
+            return from x in this.repo.ReadAll()
+                   where x.CopiesSold * x.Price > 0
+                   select new GameInfo()
+                   {
+                       Game = x,
+                       TotalRevenue = x.CopiesSold * x.Price
+                   };
         }
+
+        public GameInfo GetMostProfitableGame()
+        {
+            var q = from x in this.repo.ReadAll()
+                    where x.CopiesSold * x.Price > 0
+                    select new GameInfo()
+                    {
+                        Game = x,
+                        TotalRevenue = x.CopiesSold * x.Price
+                    };
+            var i = q.Max(x => x.TotalRevenue);
+            return q.FirstOrDefault(t => t.TotalRevenue.Equals(i));
+        }
+    }
+
+    public class GameInfo
+    {
+        public Game Game { get; set; }
+        public int TotalRevenue { get; set; }
     }
 }

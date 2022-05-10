@@ -23,6 +23,11 @@ namespace C752IT_HFT_2021222.Client
             };*/
 
             var item = logic.ReadAll();
+
+            var item2 = logic.GetGameRevenueInfo();
+            var i = item2.Max(i => i.TotalRevenue);
+            var item3 = logic.GetMostProfitableGame();
+
             ;
         }
     }

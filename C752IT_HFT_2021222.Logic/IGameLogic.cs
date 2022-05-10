@@ -1,14 +1,16 @@
 ﻿using C752IT_HFT_2021222.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace C752IT_HFT_2021222.Logic
 {
-    interface IGameLogic
+    public interface IGameLogic
     {
         void Create(Game item);
         void Delete(int id);
         double? GetAveragePriceOfGames();
-        Game GetMostProfitableGame();
+        IEnumerable<GameInfo> GetGameRevenueInfo();
+        GameInfo GetMostProfitableGame();
         Game Read(int id);
         IQueryable<Game> ReadAll();
         void Update(Game item);
