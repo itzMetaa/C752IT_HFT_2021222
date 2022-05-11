@@ -54,7 +54,6 @@ namespace C752IT_HFT_2021222.Test
             }.AsQueryable();
 
             mockGameRepo.Setup(m => m.ReadAll()).Returns(games);
-            int id;
             logic = new GameLogic(mockGameRepo.Object);
         }
         [Test]
@@ -162,6 +161,14 @@ namespace C752IT_HFT_2021222.Test
 
             var actual = logic.GetNumberOfGamesPerType();
             Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        public void DeleteTest()
+        {
+            var game = new Game() { Id = 1, Title = "XD bro", Price = 200 };
+            logic.Create(game);
+            logic.Delete(1);
+            mockGameRepo.Verify(r => r.Delete(1), Times.Once);
         }
     }
 }
