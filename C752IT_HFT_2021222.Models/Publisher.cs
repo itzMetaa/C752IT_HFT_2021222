@@ -28,5 +28,10 @@ namespace C752IT_HFT_2021222.Models
             Name = name;
             Developers = new HashSet<Developer>();
         }
+
+        public Publisher()
+        {
+        }
+
     }
 }

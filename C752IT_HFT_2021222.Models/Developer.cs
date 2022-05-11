@@ -40,5 +40,9 @@ namespace C752IT_HFT_2021222.Models
             PublisherId = publisherId;
             Games = new HashSet<Game>();
         }
+
+        public Developer()
+        {
+        }
     }
 }

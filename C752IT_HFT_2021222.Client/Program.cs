@@ -14,7 +14,29 @@ namespace C752IT_HFT_2021222.Client
             {
                 Console.WriteLine("Enter game title: ");
                 string title = Console.ReadLine();
-                rest.Post(new Game() { Title = title }, "game");
+                Console.WriteLine("Enter game price (whole number): ");
+                int price = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter game rating(0.0-10.0 please use hungarian comma \",\" ): ");
+                double rating = double.Parse(Console.ReadLine());
+                Console.WriteLine("Enter number of copies sold (whole number): ");
+                int copies = int.Parse(Console.ReadLine());
+                Console.WriteLine($"Enter a description (max 200): ");
+                string description = Console.ReadLine();
+                rest.Post(new Game() { Title = title, Price = price, Rating = rating, CopiesSold = copies, Description = description }, "game");
+            }
+            if (entity == "Publisher")
+            {
+                Console.WriteLine("Enter publisher name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Publisher() { Name = name}, "api/publisher");
+            }
+            if (entity == "Developer")
+            {
+                Console.WriteLine("Enter developer team's name: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter developer team's size (whole number): ");
+                int size = int.Parse(Console.ReadLine());
+                rest.Post(new Developer() { Name = name, TeamSize = size, }, "api/developer");
             }
         }
         static void List(string entity)
