@@ -49,6 +49,22 @@ namespace C752IT_HFT_2021222.Client
                     Console.WriteLine($"{item.Id} {item.Title}");
                 }
             }
+            if (entity == "Publisher")
+            {
+                var publishers = rest.Get<Publisher>("api/publisher");
+                foreach (var item in publishers)
+                {
+                    Console.WriteLine($"{item.Id} {item.Name}");
+                }
+            }
+            if (entity == "Developer")
+            {
+                var devs = rest.Get<Developer>("api/developer");
+                foreach (var item in devs)
+                {
+                    Console.WriteLine($"{item.Id} {item.Name}");
+                }
+            }
             Console.ReadLine();
         }
         static void Update(string entity)
@@ -71,6 +87,18 @@ namespace C752IT_HFT_2021222.Client
                 Console.Write("Enter Game's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
                 rest.Delete(id, "game");
+            }
+            if (entity == "Developer")
+            {
+                Console.Write("Enter Developer's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "api/developer");
+            }
+            if (entity == "Publisher")
+            {
+                Console.Write("Enter Publisher's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "api/publisher");
             }
         }
 
