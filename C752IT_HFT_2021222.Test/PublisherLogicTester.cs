@@ -64,7 +64,7 @@ namespace C752IT_HFT_2021222.Test
             }
             catch
             {
-
+                 
             }
 
             mockPublisherRepo.Verify(r => r.Create(pub), Times.Never);
