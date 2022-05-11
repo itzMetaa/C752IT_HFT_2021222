@@ -71,6 +71,17 @@ namespace C752IT_HFT_2021222.Models
         public Game()
         {
         }
+
+        public override bool Equals(object obj)
+        {
+
+            return obj.GetHashCode().Equals(this.GetHashCode());
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Title, Price, Rating, CopiesSold, Description, Type);
+        }
     }
 
 
