@@ -1,4 +1,5 @@
 ﻿using C752IT_HFT_2021222.Logic;
+using C752IT_HFT_2021222.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,14 +20,6 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         {
             this.logic = logic;
         }
-
-        // GET api/<StatController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [HttpGet]
         public GameInfo MostProfitableGame()
         {
@@ -36,6 +29,16 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         public IEnumerable<GameInfo> GameRevenueInfo()
         {
             return this.logic.GetGameRevenueInfo();
+        }
+        [HttpGet]
+        public double? AveragePriceOfGames()
+        {
+            return this.logic.GetAveragePriceOfGames();
+        }
+        [HttpGet]
+        public IEnumerable<KeyValuePair<GameType, int>> NumberOfGamesPerType()
+        {
+            return this.logic.GetNumberOfGamesPerType();
         }
 
     }

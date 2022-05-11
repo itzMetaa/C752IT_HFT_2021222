@@ -2,12 +2,32 @@
 using System;
 using System.Linq;
 using ConsoleTools;
+using System.Collections.Generic;
 
 namespace C752IT_HFT_2021222.Client
 {
     class Program
     {
         static RestService rest;
+        static void Action(string entity)
+        {
+            if (entity== "AveragePriceOfGames")
+            {
+                var x = rest.GetSingle<double?>("api/Stat/AveragePriceOfGames");
+                Console.WriteLine($"{x.Value}");
+                Console.ReadLine();
+            }
+            if (entity== "NumberOfGamesPerType")
+            {
+                var x = rest.Get<KeyValuePair<GameType, int>>("api/Stat/NumberOfGamesPerType");
+                foreach (var item in x)
+                {
+                    Console.WriteLine($"{item.Key}, {item.Value}");
+                }
+                
+                Console.ReadLine();
+            }
+        }
         static void Create(string entity)
         {
             if (entity == "Game")
@@ -230,6 +250,8 @@ namespace C752IT_HFT_2021222.Client
                 .Add("Create", ()=>Create("Game"))
                 .Add("Delete", ()=>Delete("Game"))
                 .Add("Update", ()=>Update("Game"))
+                .Add("Get average price of games", ()=>Action("AveragePriceOfGames"))
+                .Add("Get number of games per type", ()=> Action("NumberOfGamesPerType"))
                 .Add("Exit", ConsoleMenu.Close)
                 ;
 

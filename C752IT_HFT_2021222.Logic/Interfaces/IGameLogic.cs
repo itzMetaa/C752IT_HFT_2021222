@@ -10,6 +10,7 @@ namespace C752IT_HFT_2021222.Logic
         void Delete(int id);
         double? GetAveragePriceOfGames();
         IEnumerable<GameInfo> GetGameRevenueInfo();
+        IEnumerable<KeyValuePair<GameType, int>> GetNumberOfGamesPerType();
         GameInfo GetMostProfitableGame();
         Game Read(int id);
         IQueryable<Game> ReadAll();
