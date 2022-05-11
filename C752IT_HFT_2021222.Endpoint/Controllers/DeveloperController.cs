@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using C752IT_HFT_2021222.Logic;
+using C752IT_HFT_2021222.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +14,46 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
     [ApiController]
     public class DeveloperController : ControllerBase
     {
+        IDeveloperLogic logic;
+
+        public DeveloperController(IDeveloperLogic logic)
+        {
+            this.logic = logic;
+        }
+
         // GET: api/<DeveloperController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Developer> ReadAll()
         {
-            return new string[] { "value1", "value2" };
+            return this.logic.ReadAll();
         }
 
         // GET api/<DeveloperController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Developer Read(int id)
         {
-            return "value";
+            return this.logic.Read(id);
         }
 
         // POST api/<DeveloperController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Create([FromBody] Developer value)
         {
+            this.logic.Create(value);
         }
 
         // PUT api/<DeveloperController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] Developer value)
         {
+            this.logic.Update(value);
         }
 
         // DELETE api/<DeveloperController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            this.logic.Delete(id);
         }
     }
 }

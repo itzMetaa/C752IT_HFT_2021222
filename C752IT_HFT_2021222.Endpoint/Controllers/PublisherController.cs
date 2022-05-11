@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using C752IT_HFT_2021222.Logic;
+using C752IT_HFT_2021222.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +14,46 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
     [ApiController]
     public class PublisherController : ControllerBase
     {
+        IPublisherLogic logic;
+
+        public PublisherController(IPublisherLogic logic)
+        {
+            this.logic = logic;
+        }
+
         // GET: api/<PublisherController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Publisher> ReadAll()
         {
-            return new string[] { "value1", "value2" };
+            return this.logic.ReadAll();
         }
 
         // GET api/<PublisherController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Publisher Get(int id)
         {
-            return "value";
+            return this.logic.Read(id);
         }
 
         // POST api/<PublisherController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Create([FromBody] Publisher value)
         {
+            this.logic.Create(value);
         }
 
         // PUT api/<PublisherController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromBody] Publisher value)
         {
+            this.logic.Update(value);
         }
 
         // DELETE api/<PublisherController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            this.logic.Delete(id);
         }
     }
 }
