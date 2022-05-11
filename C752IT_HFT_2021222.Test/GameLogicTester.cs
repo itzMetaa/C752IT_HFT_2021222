@@ -54,6 +54,7 @@ namespace C752IT_HFT_2021222.Test
             }.AsQueryable();
 
             mockGameRepo.Setup(m => m.ReadAll()).Returns(games);
+            int id;
             logic = new GameLogic(mockGameRepo.Object);
         }
         [Test]
@@ -142,6 +143,25 @@ namespace C752IT_HFT_2021222.Test
             var game = new Game() { Title = "XD3" };
             logic.Create(game);
             mockGameRepo.Verify(r => r.Create(game), Times.Once);
+        }
+        [Test]
+        public void UpdateGameTest()
+        {
+            var game = new Game() { Id= 1, Title = "XD bro", Price = 200 };
+            logic.Create(game);
+            game.Price = 3000;
+            logic.Update(game);
+            mockGameRepo.Verify(r => r.Update(game), Times.Once);
+        }
+        [Test]
+        public void GetNumberOfGamesPerTypeTest()
+        {
+            var expected = logic.ReadAll()
+                .GroupBy(x => x.Type)
+                .Select(x => new KeyValuePair<GameType, int>(x.Key, x.Count()));
+
+            var actual = logic.GetNumberOfGamesPerType();
+            Assert.AreEqual(expected, actual);
         }
     }
 }

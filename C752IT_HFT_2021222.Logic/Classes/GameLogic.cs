@@ -84,6 +84,14 @@ namespace C752IT_HFT_2021222.Logic
             var i = q.Max(x => x.TotalRevenue);
             return q.FirstOrDefault(t => t.TotalRevenue.Equals(i));
         }
+
+        public IEnumerable<KeyValuePair<GameType, int>> GetNumberOfGamesPerType()
+        {
+            return this.repo
+                .ReadAll()
+                .GroupBy(x => x.Type)
+                .Select(x => new KeyValuePair<GameType, int>(x.Key, x.Count()));
+        }
     }
 
     public class GameInfo
