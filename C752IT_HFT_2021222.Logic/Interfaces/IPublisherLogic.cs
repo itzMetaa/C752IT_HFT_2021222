@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace C752IT_HFT_2021222.Logic
 {
-    interface IPublisherLogic
+    public interface IPublisherLogic
     {
         void Create(Publisher item);
         void Delete(int id);

@@ -121,5 +121,27 @@ namespace C752IT_HFT_2021222.Test
 
             Assert.AreEqual(expected, actual);
         }
+        [Test]
+        public void CreateInCorrectGameTest()
+        {
+            var game = new Game() { Title = "XD" };
+            try
+            {
+                logic.Create(game);
+            }
+            catch
+            {
+
+            }
+
+            mockGameRepo.Verify(r => r.Create(game),Times.Never);
+        }
+        [Test]
+        public void CreateCorrectGameTest()
+        {
+            var game = new Game() { Title = "XD3" };
+            logic.Create(game);
+            mockGameRepo.Verify(r => r.Create(game), Times.Once);
+        }
     }
 }

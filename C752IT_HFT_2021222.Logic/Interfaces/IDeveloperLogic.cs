@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace C752IT_HFT_2021222.Logic
 {
-    interface IDeveloperLogic
+    public interface IDeveloperLogic
     {
         void Create(Developer item);
         void Delete(int id);
