@@ -1,4 +1,5 @@
 ﻿using C752IT_HFT_2021222.Logic;
+using C752IT_HFT_2021222.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace C752IT_HFT_2021222.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class GameController : ControllerBase
     {
@@ -20,34 +21,37 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         }
         // GET: api/<GameController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Game> ReadAll()
         {
-            return new string[] { "value1", "value2" };
+            return this.logic.ReadAll();
         }
 
         // GET api/<GameController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Game Read(int id)
         {
-            return "value";
+            return this.logic.Read(id);
         }
 
         // POST api/<GameController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Create([FromBody] Game value)
         {
+            this.logic.Create(value);
         }
 
         // PUT api/<GameController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromBody] Game value)
         {
+            this.logic.Update(value);
         }
 
         // DELETE api/<GameController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            this.logic.Delete(id);
         }
     }
 }

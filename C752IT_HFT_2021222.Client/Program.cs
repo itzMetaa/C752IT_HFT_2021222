@@ -1,6 +1,4 @@
 ﻿using C752IT_HFT_2021222.Models;
-using C752IT_HFT_2021222.Repository;
-using C752IT_HFT_2021222.Logic;
 using System;
 using System.Linq;
 using ConsoleTools;
@@ -9,67 +7,54 @@ namespace C752IT_HFT_2021222.Client
 {
     class Program
     {
-        static GameLogic gameLogic;
-        static DeveloperLogic developerLogic;
-        static PublisherLogic publisherLogic;
+        static RestService rest;
         static void Create(string entity)
         {
-            Console.WriteLine(entity + " create");
-            Console.ReadLine();
+            if (entity == "Game")
+            {
+                Console.WriteLine("Enter game title: ");
+                string title = Console.ReadLine();
+                rest.Post(new Game() { Title = title }, "game");
+            }
         }
         static void List(string entity)
         {
-            switch (entity)
+            if (entity == "Game")
             {
-                case "Game":
-                    var items = gameLogic.ReadAll();
-                    Console.WriteLine("Id" + "\t" + "Title");
-                    foreach (var item in items)
-                    {
-                        Console.WriteLine($"{item.Id}\t{item.Title}");
-                    }
-                    break;
-                case "Publisher":
-                    var items2 = publisherLogic.ReadAll();
-                    Console.WriteLine("Id" + "\t" + "Name");
-                    foreach (var item in items2)
-                    {
-                        Console.WriteLine($"{item.Id}\t{item.Name}");
-                    }
-                    break;
-                case "Developer":
-                    var items3 = developerLogic.ReadAll();
-                    Console.WriteLine("Id" + "\t" + "Name");
-                    foreach (var item in items3)
-                    {
-                        Console.WriteLine($"{item.Id}\t{item.Name}");
-                    }
-                    break;
+                var games = rest.Get<Game>("game");
+                foreach (var item in games)
+                {
+                    Console.WriteLine($"{item.Id} {item.Title}");
+                }
             }
-            Console.WriteLine(entity + " list");
             Console.ReadLine();
         }
         static void Update(string entity)
         {
-            Console.WriteLine(entity + " update");
-            Console.ReadLine();
+            if (entity == "Game")
+            {
+                Console.Write("Enter game's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Game temp = rest.Get<Game>(id, "game");
+                Console.Write($"New title: [old: {temp.Title}]: ");
+                string title = Console.ReadLine();
+                temp.Title = title;
+                rest.Put(temp, "game");
+            }
         }
         static void Delete(string entity)
         {
-            Console.WriteLine(entity + " delete");
-            Console.ReadLine();
+            if (entity == "Game")
+            {
+                Console.Write("Enter Game's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "game");
+            }
         }
 
         static void Main(string[] args)
         {
-            var ctx = new GameDbContext();
-            var rg = new GameRepository(ctx);
-            var rd = new DeveloperRepository(ctx);
-            var rp = new PublisherRepository(ctx);
-
-            gameLogic = new GameLogic(rg);
-            developerLogic = new DeveloperLogic(rd);
-            publisherLogic = new PublisherLogic(rp);
+            rest = new RestService("http://localhost:54503/", "game");
 
             var publisherSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Publisher"))
