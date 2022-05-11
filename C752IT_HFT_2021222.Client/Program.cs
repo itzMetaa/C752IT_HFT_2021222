@@ -74,11 +74,114 @@ namespace C752IT_HFT_2021222.Client
                 Console.Write("Enter game's id to update: ");
                 int id = int.Parse(Console.ReadLine());
                 Game temp = rest.Get<Game>(id, "game");
-                Console.Write($"New title: [old: {temp.Title}]: ");
+                Console.WriteLine("You can skip by writing \'s\'");
+                Console.WriteLine($"New title [old: {temp.Title}]: ");
                 string title = Console.ReadLine();
-                temp.Title = title;
+                if (title!="s")
+                {
+                    temp.Title = title;
+                }
+                Console.WriteLine($"New price [old: {temp.Price}] (whole number): ");
+                string price = Console.ReadLine();
+                if (price != "s")
+                {
+                    temp.Price = int.Parse(price);
+                }
+                Console.WriteLine($"New rating: [old: {temp.Rating}](0.0-10.0 please use hungarian comma \',\' ): ");
+                string rating = Console.ReadLine();
+                if (rating != "s")
+                {
+                    temp.Rating = double.Parse(rating);
+                }
+                Console.WriteLine($"New number of copies sold: [old: {temp.CopiesSold}] (whole number): ");
+                string copies = Console.ReadLine();
+                if (copies != "s")
+                {
+                    temp.CopiesSold = int.Parse(copies);
+                }
+                Console.WriteLine($"New description: [old: {temp.Description}] (max 200): ");
+                string desc = Console.ReadLine();
+                if (desc != "s")
+                {
+                    temp.Description = desc;
+                }
+                Console.WriteLine($"New type: [old: {temp.Type}]: ");
+                foreach (var item in  (GameType[]) Enum.GetValues(typeof(GameType)))
+                {
+                    Console.Write($"{item}[{item.ToString().Substring(0,2).ToLower()}] ");
+                }
+                string type = Console.ReadLine();
+                switch (type.ToLower())
+                {
+                    case "fp":
+                        temp.Type = GameType.FPS;
+                        break;
+                    case "rp":
+                        temp.Type = GameType.RPG;
+                        break;
+                    case "pu":
+                        temp.Type = GameType.Puzzle;
+                        break;
+                    case "ho":
+                        temp.Type = GameType.Horror;
+                        break;
+                    case "lo":
+                        temp.Type = GameType.Looter;
+                        break;
+                    case "rh":
+                        temp.Type = GameType.Rhythm;
+                        break;
+                    case "in":
+                        temp.Type = GameType.Indie;
+                        break;
+                    default:
+                        break;
+                }
+                Console.WriteLine($"New DeveloperId: [old: {temp.DeveloperId}]: ");
+                string devId = Console.ReadLine();
+                if (devId != "s")
+                {
+                    temp.DeveloperId = int.Parse(devId);
+                }
                 rest.Put(temp, "game");
             }
+            if (entity == "Publisher")
+            {
+                Console.Write("Enter publisher's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Publisher temp = rest.Get<Publisher>(id, "api/publisher");
+                Console.WriteLine($"New name [old: {temp.Name}]: ");
+                string name = Console.ReadLine();
+                temp.Name = name;
+                rest.Put(temp, "api/publisher");
+            }
+            if (entity == "Developer")
+            {
+                Console.Write("Enter developer's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Developer temp = rest.Get<Developer>(id, "api/developer");
+                Console.WriteLine("You can skip by writing \'s\'");
+                Console.WriteLine($"New name [old: {temp.Name}]: ");
+                string name = Console.ReadLine();
+                if (name != "s")
+                {
+                    temp.Name = name;
+                }
+                Console.WriteLine($"New team size [old: {temp.TeamSize}]: (whole number)");
+                string size = Console.ReadLine();
+                if (size != "s")
+                {
+                    temp.TeamSize = int.Parse(size);
+                }
+                Console.WriteLine($"New PublisherId [old: {temp.PublisherId}]: (whole number)");
+                string pubId = Console.ReadLine();
+                if (pubId != "s")
+                {
+                    temp.PublisherId = int.Parse(pubId);
+                }
+                rest.Put(temp, "api/developer");
+            }
+
         }
         static void Delete(string entity)
         {
@@ -106,6 +209,7 @@ namespace C752IT_HFT_2021222.Client
         {
             rest = new RestService("http://localhost:54503/", "game");
 
+            // First level submenus
             var publisherSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Publisher"))
                 .Add("Create", () => Create("Publisher"))
@@ -129,10 +233,11 @@ namespace C752IT_HFT_2021222.Client
                 .Add("Exit", ConsoleMenu.Close)
                 ;
 
+            //Main menu
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Games", () => gameSubMenu.Show())
-                .Add("Developers", () => publisherSubMenu.Show())
-                .Add("Publishers", () => developerSubMenu.Show())
+                .Add("Developers", () => developerSubMenu.Show())
+                .Add("Publishers", () => publisherSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close)
                 ;
 

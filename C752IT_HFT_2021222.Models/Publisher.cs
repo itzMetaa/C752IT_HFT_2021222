@@ -31,6 +31,7 @@ namespace C752IT_HFT_2021222.Models
 
         public Publisher()
         {
+            Developers = new HashSet<Developer>();
         }
 
     }

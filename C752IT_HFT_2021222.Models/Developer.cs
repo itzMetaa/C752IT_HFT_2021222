@@ -21,6 +21,7 @@ namespace C752IT_HFT_2021222.Models
         public int TeamSize { get; set; }
         // Game link
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Game> Games { get; set; }
         [NotMapped]
         [JsonIgnore]
@@ -43,6 +44,7 @@ namespace C752IT_HFT_2021222.Models
 
         public Developer()
         {
+            Games = new HashSet<Game>();
         }
     }
 }

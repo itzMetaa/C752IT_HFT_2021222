@@ -43,7 +43,7 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         }
 
         // PUT api/<DeveloperController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put([FromBody] Developer value)
         {
             this.logic.Update(value);
