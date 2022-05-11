@@ -1,6 +1,7 @@
 ﻿using C752IT_HFT_2021222.Logic;
 using C752IT_HFT_2021222.Models;
 using C752IT_HFT_2021222.Repository;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,25 +11,17 @@ using System.Threading.Tasks;
 
 namespace C752IT_HFT_2021222.Test
 {
-    public class FakeGameRepository : IRepository<Game>
+    [TestFixture]
+    class GameLogicTester
     {
-        public void Create(Game item)
-        {
-            throw new NotImplementedException();
-        }
+        GameLogic logic;
+        Mock<IRepository<Game>> mockGameRepo;
 
-        public void Delete(int id)
+        [SetUp]
+        public void Init()
         {
-            throw new NotImplementedException();
-        }
+            mockGameRepo = new Mock<IRepository<Game>>();
 
-        public Game Read(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<Game> ReadAll()
-        {
             var games = new List<Game>()
             {
                 new Game(){
@@ -58,27 +51,10 @@ namespace C752IT_HFT_2021222.Test
                     Description= "Nope",
                     Type = GameType.Horror
                 }
-            };
+            }.AsQueryable();
 
-            return games.AsQueryable();
-        }
-
-        public void Update(Game item)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-    [TestFixture]
-    class GameLogicTester
-    {
-        GameLogic logic;
-
-        [SetUp]
-        public void Init()
-        {
-            logic = new GameLogic(new FakeGameRepository());
+            mockGameRepo.Setup(m => m.ReadAll()).Returns(games);
+            logic = new GameLogic(mockGameRepo.Object);
         }
         [Test]
         public void GetAveragePriceOfGamesTest()
