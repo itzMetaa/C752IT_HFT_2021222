@@ -235,6 +235,7 @@ namespace C752IT_HFT_2021222.Client
                 .Add("Create", () => Create("Publisher"))
                 .Add("Delete", () => Delete("Publisher"))
                 .Add("Update", () => Update("Publisher"))
+                .Add("Get games of a publisher", () => Action("PublisherGames"))
                 .Add("Exit", ConsoleMenu.Close)
                 ;
             var developerSubMenu = new ConsoleMenu(args, level: 1)
@@ -242,6 +243,7 @@ namespace C752IT_HFT_2021222.Client
                 .Add("Create", () => Create("Developer"))
                 .Add("Delete", () => Delete("Developer"))
                 .Add("Update", () => Update("Developer"))
+                .Add("Get games of a developer", () => Action("DeveloperGames"))
                 .Add("Exit", ConsoleMenu.Close)
                 ;
 

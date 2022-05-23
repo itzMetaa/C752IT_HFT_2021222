@@ -14,32 +14,40 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
     [ApiController]
     public class StatController : ControllerBase
     {
-        IGameLogic logic;
+        IGameLogic gameLogic;
+        IDeveloperLogic devLogic;
+        IPublisherLogic publisherLogic;
 
-        public StatController(IGameLogic logic)
+        public StatController(IGameLogic logic, IDeveloperLogic devLogic, IPublisherLogic pubLogic)
         {
-            this.logic = logic;
+            this.gameLogic = logic;
+            this.devLogic = devLogic;
+            this.publisherLogic = pubLogic;
         }
         [HttpGet]
         public GameInfo MostProfitableGame()
         {
-            return this.logic.GetMostProfitableGame();
+            return this.gameLogic.GetMostProfitableGame();
         }
         [HttpGet]
         public IEnumerable<GameInfo> GameRevenueInfo()
         {
-            return this.logic.GetGameRevenueInfo();
+            return this.gameLogic.GetGameRevenueInfo();
         }
         [HttpGet]
         public double? AveragePriceOfGames()
         {
-            return this.logic.GetAveragePriceOfGames();
+            return this.gameLogic.GetAveragePriceOfGames();
         }
         [HttpGet]
         public IEnumerable<KeyValuePair<GameType, int>> NumberOfGamesPerType()
         {
-            return this.logic.GetNumberOfGamesPerType();
+            return this.gameLogic.GetNumberOfGamesPerType();
         }
-
+        [HttpGet("{id}")]
+        public IEnumerable<Game> GetGamesOfPublisher(int id)
+        {
+            return this.publisherLogic.GamesOfPublisher(id);
+        }
     }
 }
