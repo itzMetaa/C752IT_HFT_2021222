@@ -59,24 +59,19 @@ namespace C752IT_HFT_2021222.Logic
                 .Read(id)
                 .Developers;
 
-            //return from dev in devs
-            //       select dev.Games.AsEnumerable();
+            return from dev in devs
+                   from game in dev.Games
+                   select game;
 
-            /*
-             * LINQ syntax is typically less efficient than a foreach loop. It's good to be aware of any performance tradeoff that might occur when you use LINQ to improve the readability of your code.
-             * 
-             * https://docs.microsoft.com/hu-hu/visualstudio/ide/reference/convert-foreach-linq?view=vs-2019
-             */
-
-            var games = new List<Game>();
-            foreach (var dev in devs)
-            {
-                foreach (var game in dev.Games)
-                {
-                    games.Add(game);
-                }
-            }
-            return games.AsEnumerable();
+            //var games = new List<Game>();
+            //foreach (var dev in devs)
+            //{
+            //    foreach (var game in dev.Games)
+            //    {
+            //        games.Add(game);
+            //    }
+            //}
+            //return games.AsEnumerable();
         }
     }
 }

@@ -46,11 +46,11 @@ namespace C752IT_HFT_2021222.Repository
             .OnDelete(DeleteBehavior.Cascade)
             );
 
-            modelBuilder.Entity<Publisher>(x => x
-            .HasMany(x => x.Developers)
-            .WithOne(x => x.Publisher)
-            .OnDelete(DeleteBehavior.Cascade)
-            );
+            //modelBuilder.Entity<Publisher>(x => x
+            //.HasMany(x => x.Developers)
+            //.WithOne(x => x.Publisher)
+            //.OnDelete(DeleteBehavior.Cascade)
+            //);
 
             modelBuilder.Entity<Publisher>().HasData(new Publisher[]
                 {

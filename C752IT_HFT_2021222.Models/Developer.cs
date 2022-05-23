@@ -23,9 +23,6 @@ namespace C752IT_HFT_2021222.Models
         [NotMapped]
         [JsonIgnore]
         public virtual ICollection<Game> Games { get; set; }
-        [NotMapped]
-        [JsonIgnore]
-        public virtual Game Game { get; set; }
         // Publisher link
         [NotMapped]
         [JsonIgnore]
