@@ -33,12 +33,12 @@ namespace C752IT_HFT_2021222.Logic
 
         public Developer Read(int id)
         {
-            var pub = this.repo.Read(id);
-            if (pub == null)
+            var dev = this.repo.Read(id);
+            if (dev == null)
             {
                 throw new ArgumentException("Game doesn't exist");
             }
-            return pub;
+            return dev;
         }
 
         public IQueryable<Developer> ReadAll()
@@ -52,5 +52,11 @@ namespace C752IT_HFT_2021222.Logic
         }
 
         // Non cruds
+        public IEnumerable<Game> GamesOfDeveloper(int id)
+        {
+            return this.repo
+                .Read(id)
+                .Games.AsEnumerable();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using C752IT_HFT_2021222.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace C752IT_HFT_2021222.Logic
@@ -10,5 +11,6 @@ namespace C752IT_HFT_2021222.Logic
         Developer Read(int id);
         IQueryable<Developer> ReadAll();
         void Update(Developer item);
+        IEnumerable<Game> GamesOfDeveloper(int id);
     }
 }
