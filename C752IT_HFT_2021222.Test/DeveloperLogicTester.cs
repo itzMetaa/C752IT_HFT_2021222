@@ -35,6 +35,7 @@ namespace C752IT_HFT_2021222.Test
             }.AsQueryable();
 
             mockDeveloperRepo.Setup(m => m.ReadAll()).Returns(devs);
+            mockDeveloperRepo.Setup(m => m.Read(1)).Returns(devs.FirstOrDefault(x => x.Id.Equals(1)));
             logic = new DeveloperLogic(mockDeveloperRepo.Object);
         }
         [Test]
@@ -68,6 +69,11 @@ namespace C752IT_HFT_2021222.Test
             }
 
             mockDeveloperRepo.Verify(r => r.Create(dev), Times.Never);
+        }
+        [Test]
+        public void GamesOfDevelopersTest()
+        {
+            Assert.IsEmpty(logic.GamesOfDeveloper(1));
         }
     }
 }

@@ -24,6 +24,8 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
             this.developerLogic = devLogic;
             this.publisherLogic = pubLogic;
         }
+
+        //game logic
         [HttpGet]
         public GameInfo MostProfitableGame()
         {
@@ -44,11 +46,13 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         {
             return this.gameLogic.GetNumberOfGamesPerType();
         }
+        //Publisher logic
         [HttpGet("{id}")]
         public IEnumerable<Game> GetGamesOfPublisher(int id)
         {
             return this.publisherLogic.GamesOfPublisher(id);
         }
+        //Developer logic
         [HttpGet("{id}")]
         public IEnumerable<Game> GetGamesOfDevelopers(int id)
         {

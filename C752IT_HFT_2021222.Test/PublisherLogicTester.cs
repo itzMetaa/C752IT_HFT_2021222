@@ -14,7 +14,7 @@ namespace C752IT_HFT_2021222.Test
     [TestFixture]
     class PublisherLogicTester
     {
-        PublisherLogic logic;
+        PublisherLogic pubLogic;
         Mock<IRepository<Publisher>> mockPublisherRepo;
         [SetUp]
         public void Init()
@@ -34,24 +34,53 @@ namespace C752IT_HFT_2021222.Test
 
             }.AsQueryable();
 
+            //var devs = new List<Developer>()
+            //{
+            //    new Developer(){
+            //        Id = 1,
+            //        Name = "YesDev",
+            //        PublisherId = 1
+            //    },
+            //    new Developer(){
+            //        Id = 2,
+            //        Name = "NopeDev",
+            //        PublisherId = 2
+            //    }
+            //}.AsQueryable();
+
+            //var games = new List<Game>()
+            //{
+            //    new Game(){
+            //        Id = 1,
+            //        Title = "YesGame",
+            //        DeveloperId = 1
+            //    },
+            //    new Game(){
+            //        Id = 2,
+            //        Title = "NopeGame",
+            //        DeveloperId = 2
+            //    }
+            //}.AsQueryable();
+
             mockPublisherRepo.Setup(m => m.ReadAll()).Returns(pubs);
-            logic = new PublisherLogic(mockPublisherRepo.Object);
+            mockPublisherRepo.Setup(m => m.Read(1)).Returns(pubs.FirstOrDefault(x=>x.Id.Equals(1)));
+            pubLogic = new PublisherLogic(mockPublisherRepo.Object);
         }
         [Test]
         public void DeleteTest()
         {
             var pub = new Publisher() { Id = 1, Name = "XD bro" };
-            logic.Create(pub);
-            logic.Delete(1);
+            pubLogic.Create(pub);
+            pubLogic.Delete(1);
             mockPublisherRepo.Verify(r => r.Delete(1), Times.Once);
         }
         [Test]
         public void UpdateTest()
         {
             var pub = new Publisher() { Id = 1, Name = "XD bro" };
-            logic.Create(pub);
+            pubLogic.Create(pub);
             pub.Name = "Lessgoo";
-            logic.Update(pub);
+            pubLogic.Update(pub);
             mockPublisherRepo.Verify(r => r.Update(pub), Times.Once);
         }
         [Test]
@@ -60,7 +89,7 @@ namespace C752IT_HFT_2021222.Test
             var pub = new Publisher() { Name = "XD" };
             try
             {
-                logic.Create(pub);
+                pubLogic.Create(pub);
             }
             catch
             {
@@ -68,6 +97,11 @@ namespace C752IT_HFT_2021222.Test
             }
 
             mockPublisherRepo.Verify(r => r.Create(pub), Times.Never);
+        }
+        [Test]
+        public void GamesOfPublisherTest() 
+        {
+            Assert.IsEmpty(pubLogic.GamesOfPublisher(1));
         }
     }
 }
