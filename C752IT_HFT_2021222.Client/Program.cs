@@ -14,7 +14,7 @@ namespace C752IT_HFT_2021222.Client
             if (entity== "AveragePriceOfGames")
             {
                 var x = rest.GetSingle<double?>("api/Stat/AveragePriceOfGames");
-                Console.WriteLine($"{x.Value}");
+                Console.WriteLine($"{x.Value}$");
                 Console.ReadLine();
             }
             if (entity== "NumberOfGamesPerType")
@@ -22,7 +22,7 @@ namespace C752IT_HFT_2021222.Client
                 var x = rest.Get<KeyValuePair<GameType, int>>("api/Stat/NumberOfGamesPerType");
                 foreach (var item in x)
                 {
-                    Console.WriteLine($"{item.Key}, {item.Value}");
+                    Console.WriteLine($"{item.Key}: {item.Value} games");
                 }
                 
                 Console.ReadLine();
@@ -34,7 +34,7 @@ namespace C752IT_HFT_2021222.Client
                 var games = rest.Get<IEnumerable<Game>>(id, "api/Stat/GetGamesOfDevelopers");
                 foreach (var item in games)
                 {
-                    Console.WriteLine($"{item.Id} {item.Title}");
+                    Console.WriteLine($"{item.Id, 3} | {item.Title}");
                 }
                 Console.ReadLine();
             }
@@ -45,7 +45,22 @@ namespace C752IT_HFT_2021222.Client
                 var games = rest.Get<IEnumerable<Game>>(id, "api/Stat/GetGamesOfPublisher");
                 foreach (var item in games)
                 {
-                    Console.WriteLine($"{item.Id} {item.Title}");
+                    Console.WriteLine($"{item.Id,3} | {item.Title}");
+                }
+                Console.ReadLine();
+            }
+            if (entity == "MostProfitableGame")
+            {
+                var game = rest.GetSingle<GameInfo>("/api/Stat/MostProfitableGame");
+                Console.WriteLine($"The most profitable game was: {game.Game.Title} which made: {game.TotalRevenue}$");
+                Console.ReadLine();
+            }
+            if (entity == "GameRevenueInfo")
+            {
+                var games = rest.Get<GameInfo>("/api/Stat/GameRevenueInfo");
+                foreach (var item in games)
+                {
+                    Console.WriteLine($"{item.Game.Id,3} | {item.Game.Title} revenue: {item.TotalRevenue}$");
                 }
                 Console.ReadLine();
             }
@@ -88,7 +103,10 @@ namespace C752IT_HFT_2021222.Client
                 var games = rest.Get<Game>("game");
                 foreach (var item in games)
                 {
-                    Console.WriteLine($"{item.Id} {item.Title}");
+                    //Can't seem to make it work
+                    //Console.WriteLine($"{item.Id, 3} | {item.Title, 30} [rating: {item.Rating}/10,0 |  {item.Price}$ | {item.Type} | units sold: {item.CopiesSold}] - made by: {item.Developer.Name},  {item.Description}");
+
+                    Console.WriteLine($"{item.Id,3} | {item.Title,30} [rating: {item.Rating}/10,0 |  {item.Price}$ | {item.Type} | units sold: {item.CopiesSold}]  {item.Description}");
                 }
             }
             if (entity == "Publisher")
@@ -96,7 +114,7 @@ namespace C752IT_HFT_2021222.Client
                 var publishers = rest.Get<Publisher>("api/publisher");
                 foreach (var item in publishers)
                 {
-                    Console.WriteLine($"{item.Id} {item.Name}");
+                    Console.WriteLine($"{item.Id,3} | {item.Name}, number of developers: {item.Developers.Count()}");
                 }
             }
             if (entity == "Developer")
@@ -104,7 +122,7 @@ namespace C752IT_HFT_2021222.Client
                 var devs = rest.Get<Developer>("api/developer");
                 foreach (var item in devs)
                 {
-                    Console.WriteLine($"{item.Id} {item.Name}");
+                    Console.WriteLine($"{item.Id,3} | {item.Name}, team size: {item.TeamSize},  number of games: {item.Games.Count()}");
                 }
             }
             Console.ReadLine();
@@ -276,6 +294,8 @@ namespace C752IT_HFT_2021222.Client
                 .Add("Update", ()=>Update("Game"))
                 .Add("Get average price of games", ()=>Action("AveragePriceOfGames"))
                 .Add("Get number of games per type", ()=> Action("NumberOfGamesPerType"))
+                .Add("Get most profitable game", ()=> Action("MostProfitableGame"))
+                .Add("Get game revenue info", ()=> Action("GameRevenueInfo"))
                 .Add("Exit", ConsoleMenu.Close)
                 ;
 
@@ -286,7 +306,7 @@ namespace C752IT_HFT_2021222.Client
                 .Add("Publishers", () => publisherSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close)
                 ;
-
+            
             menu.Show();
         }
     }

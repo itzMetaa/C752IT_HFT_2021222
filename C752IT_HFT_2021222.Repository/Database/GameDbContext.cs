@@ -24,9 +24,14 @@ namespace C752IT_HFT_2021222.Repository
             if (!optionsBuilder.IsConfigured)
             {
                 //string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|game.mdf;Integrated Security=True,MultipleActiveResultSets = true";
+
                 optionsBuilder
                     .UseLazyLoadingProxies()
                     .UseInMemoryDatabase("game");
+
+                //optionsBuilder
+                //  .UseLazyLoadingProxies()
+                //  .UseSqlServer(conn);
             }
         }
 
@@ -39,18 +44,35 @@ namespace C752IT_HFT_2021222.Repository
             .OnDelete(DeleteBehavior.Cascade)
             );
 
-            modelBuilder.Entity<Developer>(x => x
-            .HasOne(x => x.Publisher)
-            .WithMany(x => x.Developers)
-            .HasForeignKey(x => x.PublisherId)
+            modelBuilder.Entity<Developer>(dev => dev
+            .HasOne(dev => dev.Publisher)
+            .WithMany(pub => pub.Developers)
+            .HasForeignKey(dev => dev.PublisherId)
             .OnDelete(DeleteBehavior.Cascade)
             );
 
-            //modelBuilder.Entity<Publisher>(x => x
-            //.HasMany(x => x.Developers)
-            //.WithOne(x => x.Publisher)
-            //.OnDelete(DeleteBehavior.Cascade)
-            //);
+            modelBuilder.Entity<Publisher>(pub => pub
+            .HasMany(pub => pub.Developers)
+            .WithOne(dev => dev.Publisher)
+            .HasForeignKey(dev => dev.PublisherId)
+            .OnDelete(DeleteBehavior.Cascade)
+            );
+
+            //modelBuilder.Entity<Publisher>(entity =>
+            //{
+            //    entity.HasMany(publisher => publisher.Developers)
+            //    .WithOne(dev => dev.Publisher)
+            //    .HasForeignKey(dev => dev.PublisherId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+            //});
+
+            //modelBuilder.Entity<Developer>(entity =>
+            //{
+            //    entity.HasMany(dev => dev.Games)
+            //    .WithOne(game => game.Developer)
+            //    .HasForeignKey(game => game.DeveloperId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+            //});
 
             modelBuilder.Entity<Publisher>().HasData(new Publisher[]
                 {

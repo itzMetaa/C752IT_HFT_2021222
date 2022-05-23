@@ -19,7 +19,7 @@ namespace C752IT_HFT_2021222.Models
         public string Name { get; set; }
         //Developer Link
         [NotMapped]
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ICollection<Developer> Developers { get; set; }
 
         public Publisher(int id, string name)

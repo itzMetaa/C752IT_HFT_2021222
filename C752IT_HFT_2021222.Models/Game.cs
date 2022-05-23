@@ -31,11 +31,10 @@ namespace C752IT_HFT_2021222.Models
         public string Description { get; set; }
         public GameType Type { get; set; }
         //Developer link
-        [NotMapped]
+        //[NotMapped]
         [JsonIgnore]
+        [ForeignKey("DeveloperId")]
         public virtual Developer Developer { get; set; }
-
-        [ForeignKey(nameof(Developer))]
         public int DeveloperId { get; set; }
 
         public Game(int id, string title, int price, string description, GameType type, int developerId)
@@ -58,14 +57,6 @@ namespace C752IT_HFT_2021222.Models
             Description = description;
             Type = type;
             DeveloperId = developerId;
-        }
-
-        public Game(string title, int price, string description, GameType type)
-        {
-            Title = title;
-            Price = price;
-            Description = description;
-            Type = type;
         }
 
         public Game()
