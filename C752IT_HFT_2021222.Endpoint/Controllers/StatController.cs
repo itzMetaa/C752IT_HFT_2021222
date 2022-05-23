@@ -15,13 +15,13 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
     public class StatController : ControllerBase
     {
         IGameLogic gameLogic;
-        IDeveloperLogic devLogic;
+        IDeveloperLogic developerLogic;
         IPublisherLogic publisherLogic;
 
         public StatController(IGameLogic logic, IDeveloperLogic devLogic, IPublisherLogic pubLogic)
         {
             this.gameLogic = logic;
-            this.devLogic = devLogic;
+            this.developerLogic = devLogic;
             this.publisherLogic = pubLogic;
         }
         [HttpGet]
@@ -48,6 +48,11 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         public IEnumerable<Game> GetGamesOfPublisher(int id)
         {
             return this.publisherLogic.GamesOfPublisher(id);
+        }
+        [HttpGet("{id}")]
+        public IEnumerable<Game> GetGamesOfDevelopers(int id)
+        {
+            return this.developerLogic.GamesOfDeveloper(id);
         }
     }
 }
