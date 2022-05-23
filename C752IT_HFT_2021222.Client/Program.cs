@@ -27,6 +27,28 @@ namespace C752IT_HFT_2021222.Client
                 
                 Console.ReadLine();
             }
+            if (entity == "DeveloperGames")
+            {
+                Console.Write("Enter developer's id to show games of the developers: ");
+                int id = int.Parse(Console.ReadLine());
+                var games = rest.Get<IEnumerable<Game>>(id, "api/Stat/GetGamesOfDevelopers");
+                foreach (var item in games)
+                {
+                    Console.WriteLine($"{item.Id} {item.Title}");
+                }
+                Console.ReadLine();
+            }
+            if (entity == "PublisherGames")
+            {
+                Console.Write("Enter publisher's id to show games of the publisher's developers: ");
+                int id = int.Parse(Console.ReadLine());
+                var games = rest.Get<IEnumerable<Game>>(id, "api/Stat/GetGamesOfPublisher");
+                foreach (var item in games)
+                {
+                    Console.WriteLine($"{item.Id} {item.Title}");
+                }
+                Console.ReadLine();
+            }
         }
         static void Create(string entity)
         {
