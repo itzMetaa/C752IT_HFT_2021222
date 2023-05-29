@@ -18,7 +18,6 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
         <ListBox ItemsSource="{Binding Publishers}" SelectedItem="{Binding SelectedPublisher}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -30,15 +29,12 @@
             <Button Grid.Row="1" Content="Create publisher" Command="{Binding CreatePublisherCommand}" Padding="5"/>
             <Button Content="Delete publisher" Command="{Binding DeletePublisherCommand}" Background="LightPink" Padding="5"/>
         </UniformGrid>
-
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Label Background="LightBlue" Content="Publisher name"/>
-            <TextBox Background="Snow" Text="{Binding SelectedPublisher.Name }" Height="35" Padding="5"/>
+            <TextBox Text="{Binding SelectedPublisher.Name }" Padding="5"/>
             <Button Content="Edit publisher name" Padding="5" Command="{Binding UpdatePublisherCommand}" />
-
             <Label Background="LightBlue" Content="Publisher Id:"/>
             <Label Content="{Binding SelectedPublisher.Id}"/>
         </StackPanel>
-        
     </Grid>
 </Window>

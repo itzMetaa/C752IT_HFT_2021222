@@ -3,10 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:C752IT_HFT_2021222.WpfClient"
+        xmlns:local="clr-namespace:C752IT_HFT_2021222.WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="DeveloperWindow" Height="450" Width="800">
+        Title="Developer Editor" Height="450" Width="600">
+    <Window.DataContext>
+        <local:DeveloperWindowViewModel/>
+    </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Developers}" SelectedItem="{Binding SelectedDeveloper}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <UniformGrid Grid.Column="0" Grid.Row="1" Columns="2">
+            <Button Grid.Row="1" Content="Create developer" Command="{Binding CreateDeveloperCommand}" Padding="5"/>
+            <Button Content="Delete developer" Command="{Binding DeleteDeveloperCommand}" Background="LightPink" Padding="5"/>
+        </UniformGrid>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label Background="LightBlue" Content="Developer name"/>
+            <TextBox Text="{Binding SelectedDeveloper.Name }" Padding="5"/>
+            <Label Background="LightBlue" Content="Team size"/>
+            <TextBox Text="{Binding SelectedDeveloper.TeamSize }" Padding="5"/>
+            <Label Background="LightBlue" Content="Publisher"/>
+            <ComboBox SelectedItem="{Binding SelectedPublisher}"
+                      ItemsSource="{Binding Publishers}" SelectedIndex="-1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <ComboBoxItem Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button Content="Edit developer" Padding="5" Command="{Binding UpdateDeveloperCommand}" />
+            <Label Content="Click on a developer again to see the changes" FontSize="8"/>
+        </StackPanel>
+        <UniformGrid Grid.Row="1" Grid.Column="1" Columns="1">
+            <Label Background="LightBlue" Content="(debug) publisher Id" FontSize="10"/>
+            <Label Content="{Binding SelectedDeveloper.PublisherId}" FontSize="10"/>
+        </UniformGrid>
         
     </Grid>
 </Window>

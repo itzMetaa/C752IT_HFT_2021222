@@ -23,7 +23,11 @@ namespace C752IT_HFT_2021222.Repository
         {
             if (!optionsBuilder.IsConfigured)
             {
+                #region connection
+
                 //string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|game.mdf;Integrated Security=True,MultipleActiveResultSets = true";
+
+                // change below and above for cascade deletion behaviour
 
                 optionsBuilder
                     .UseLazyLoadingProxies()
@@ -32,6 +36,8 @@ namespace C752IT_HFT_2021222.Repository
                 //optionsBuilder
                 //  .UseLazyLoadingProxies()
                 //  .UseSqlServer(conn);
+
+                #endregion
             }
         }
 
