@@ -1,0 +1,21 @@
+﻿<Window x:Class="C752IT_HFT_2021222.WpfClient.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:C752IT_HFT_2021222.WpfClient.ViewModels"
+        mc:Ignorable="d"
+        Title="Menu" Height="400" Width="300">
+    <Window.DataContext>
+        <local:MenuWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel>
+            <Button Content="Games" Margin="10" Padding="10" Command="{Binding GamesCommand}"/>
+            <Button Content="Developers" Margin="10" Padding="10" Command="{Binding DevsCommand}"/>
+            <Button Content="Publishers" Margin="10" Padding="10" Command="{Binding PubsCommand}"/>
+            <Button Content="Statistics" Margin="10" Padding="10" Command="{Binding NonCrudCommand}"/>
+            <Button Content="Exit" Background="LightPink" Margin="10" Padding="10" Command="{Binding ExitCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,6 +1,8 @@
-﻿using C752IT_HFT_2021222.Logic;
+﻿using C752IT_HFT_2021222.Endpoint.Services;
+using C752IT_HFT_2021222.Logic;
 using C752IT_HFT_2021222.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,12 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
     public class DeveloperController : ControllerBase
     {
         IDeveloperLogic logic;
+        IHubContext<SignalRHub> hub;
 
-        public DeveloperController(IDeveloperLogic logic)
+        public DeveloperController(IDeveloperLogic logic, IHubContext<SignalRHub> hub)
         {
             this.logic = logic;
+            this.hub = hub;
         }
 
         // GET: api/<DeveloperController>
@@ -40,6 +44,7 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         public void Create([FromBody] Developer value)
         {
             this.logic.Create(value);
+            this.hub.Clients.All.SendAsync("DeveloperCreated", value);
         }
 
         // PUT api/<DeveloperController>/5
@@ -47,13 +52,16 @@ namespace C752IT_HFT_2021222.Endpoint.Controllers
         public void Put([FromBody] Developer value)
         {
             this.logic.Update(value);
+            this.hub.Clients.All.SendAsync("DeveloperUpdated", value);
         }
 
         // DELETE api/<DeveloperController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var devToDelete = this.logic.Read(id);
             this.logic.Delete(id);
+            this.hub.Clients.All.SendAsync("DeveloperDeleted", devToDelete);
         }
     }
 }
