@@ -33,21 +33,21 @@ namespace C752IT_HFT_2021222.WpfClient.ViewModels
             DevsCommand = new RelayCommand
                     (() =>
                     {
-                        _ = new MainWindow().ShowDialog();
+                        _ = new DeveloperWindow().ShowDialog();
                     }
                     );
 
             PubsCommand = new RelayCommand
                     (() =>
                     {
-                        _ = new MainWindow().ShowDialog();
+                        _ = new PublisherWindow().ShowDialog();
                     }
                     );
 
             NonCrudCommand = new RelayCommand
                     (() =>
                     {
-                        _ = new MainWindow().ShowDialog();
+                        _ = new StatisticsWindow().ShowDialog();
                     }
                     );
 
