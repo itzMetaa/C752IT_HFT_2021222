@@ -3,10 +3,88 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:C752IT_HFT_2021222.WpfClient"
+        xmlns:local="clr-namespace:C752IT_HFT_2021222.WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="StatisticsWindow" Height="450" Width="800">
+        Title="StatisticsWindow" Height="600" Width="300">
+    <Window.DataContext>
+        <local:StatisticsWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <StackPanel>
+            <Label Background="LightBlue"  Content="Most profitable game"/>
+            <WrapPanel>
+                <Label Content="{Binding MostProfitableGame.Game.Title}"/>
+                <Label Content="{Binding MostProfitableGame.TotalRevenue}"/>
+                <Label Content="$"/>
+            </WrapPanel>
+            <Label Background="LightBlue"  Content="Average price of games"/>
+            <WrapPanel>
+                <Label Content="{Binding AveragePriceOfGames}"/>
+                <Label Content="$"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Background="LightBlue"  Content="List games of a developer"/>
+                <ComboBox ItemsSource="{Binding Developers}" SelectedItem="{Binding SelectedDeveloper}" Width="90">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <ComboBoxItem Content="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Command="{Binding DeveloperListCommand}"  Content="List" Padding="5" Width="40"/>
+            </WrapPanel>
+            <ListBox Height="60" ItemsSource="{Binding GamesOfDeveloper}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <Label Content="{Binding Title}"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            </ListBox>
+            <WrapPanel>
+                <Label Background="LightBlue"  Content="List games of a publisher"/>
+                <ComboBox ItemsSource="{Binding Publishers}" SelectedItem="{Binding SelectedPublisher}" Width="90">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <ComboBoxItem Content="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Command="{Binding PublisherListCommand}"  Content="List" Padding="5" Width="40"/>
+            </WrapPanel>
+            <ListBox Height="60" ItemsSource="{Binding GamesOfPublisher}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Label Content="{Binding Title}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Background="LightBlue"  Content="List number of games per type"/>
+            <ListBox Height="60" ItemsSource="{Binding NumberOfGamesPerType}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Label Content="{Binding Key}"/>
+                            <Label Content="{Binding Value}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Background="LightBlue"  Content="General revenue info of games"/>
+            <ListBox Height="60" ItemsSource="{Binding GameRevenueInfo}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Label Content="{Binding Game.Title}"/>
+                            <Label Content="{Binding TotalRevenue}"/>
+                            <Label Content="$"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Window>
