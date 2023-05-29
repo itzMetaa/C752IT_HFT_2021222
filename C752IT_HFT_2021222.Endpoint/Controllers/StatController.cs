@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace C752IT_HFT_2021222.Endpoint.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class StatController : ControllerBase
     {
