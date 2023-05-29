@@ -1,3 +1,4 @@
+using C752IT_HFT_2021222.Endpoint.Services;
 using C752IT_HFT_2021222.Logic;
 using C752IT_HFT_2021222.Models;
 using C752IT_HFT_2021222.Repository;
@@ -38,6 +39,8 @@ namespace C752IT_HFT_2021222.Endpoint
             services.AddTransient<IPublisherLogic, PublisherLogic>();
             services.AddTransient<IDeveloperLogic, DeveloperLogic>();
 
+            services.AddSignalR();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -63,6 +66,7 @@ namespace C752IT_HFT_2021222.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

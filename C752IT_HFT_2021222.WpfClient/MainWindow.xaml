@@ -22,6 +22,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="1">
+            <Label Content="Title" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedGame.Title}" Padding="10" Margin="0,0,0,30"/>
             <Button Content="Create Game" Command="{Binding CreateGameCommand}" Margin="10" Padding="10"/>
             <Button Content="Update Game" Command="{Binding UpdateGameCommand}" Margin="10" Padding="10"/>
             <Button Content="Delete Game" Command="{Binding DeleteGameCommand}" Margin="10" Padding="10"/>
