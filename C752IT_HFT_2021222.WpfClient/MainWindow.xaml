@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:C752IT_HFT_2021222.WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="Games Editor" Height="450" Width="800">
+        Title="Games Editor" Height="500" Width="800">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -21,13 +25,38 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <UniformGrid Grid.Column="0" Grid.Row="1" Columns="2">
+            <Button Grid.Row="1" Content="Create Game" Command="{Binding CreateGameCommand}" Padding="5"/>
+            <Button Content="Delete Game" Command="{Binding DeleteGameCommand}" Background="LightPink" Padding="5"/>
+        </UniformGrid>
+
+
         <StackPanel Grid.Column="1">
-            <Label Content="Title" Background="LightBlue" Padding="10"/>
-            <TextBox Text="{Binding SelectedGame.Title}" Padding="10" Margin="0,0,0,30"/>
-            <Button Content="Create Game" Command="{Binding CreateGameCommand}" Margin="10" Padding="10"/>
-            <Button Content="Update Game" Command="{Binding UpdateGameCommand}" Margin="10" Padding="10"/>
-            <Button Content="Delete Game" Command="{Binding DeleteGameCommand}" Margin="10" Padding="10"/>
+            <Label Content="Title" Background="LightBlue" Padding="2"/>
+            <TextBox Text="{Binding SelectedGame.Title}" Padding="8" Margin="0,0,0,0"/>
+            <Label Content="Price" Background="LightBlue" Padding="2"/>
+            <TextBox Text="{Binding SelectedGame.Price}" Padding="8" Margin="0,0,0,0"/>
+            <Label Content="Rating (x,y)" Background="LightBlue" Padding="2"/>
+            <TextBox Text="{Binding SelectedGame.Rating}" Padding="8" Margin="0,0,0,0"/>
+            <Label Content="Description" Background="LightBlue" Padding="2"/>
+            <TextBox Text="{Binding SelectedGame.Description}" Padding="8" Margin="0,0,0,0"/>
+            <Label Content="Number of copies sold" Background="LightBlue" Padding="2"/>
+            <TextBox Text="{Binding SelectedGame.CopiesSold}" Padding="8" Margin="0,0,0,0"/>
+            <Label Content="Type" Background="LightBlue" Padding="2"/>
+            <ComboBox Background="Snow" Text="{Binding SelectedGame.Type}" Height="35" Padding="5">
+                <ComboBoxItem>FPS</ComboBoxItem>
+                <ComboBoxItem>RPG</ComboBoxItem>
+                <ComboBoxItem>Indie</ComboBoxItem>
+                <ComboBoxItem>Puzzle</ComboBoxItem>
+                <ComboBoxItem>Horror</ComboBoxItem>
+                <ComboBoxItem>Looter</ComboBoxItem>
+                <ComboBoxItem>Rhythm</ComboBoxItem>
+            </ComboBox>
+            <Label Content="Developer's Id" Background="LightBlue" Padding="2"/>
+            <TextBox Text="{Binding SelectedGame.DeveloperId}" Padding="8" Margin="0,0,0,0"/>
+            
+            
         </StackPanel>
-        
+        <Button Grid.Column="1" Grid.Row="1" Content="Update Game" Command="{Binding UpdateGameCommand}"/>
     </Grid>
 </Window>

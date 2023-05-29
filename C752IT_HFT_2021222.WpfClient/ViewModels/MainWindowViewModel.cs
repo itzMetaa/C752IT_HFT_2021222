@@ -28,7 +28,14 @@ namespace C752IT_HFT_2021222.WpfClient.ViewModels
                     selectedGame = new Game()
                     {
                         Title = value.Title,
-                        Id = value.Id
+                        Id = value.Id,
+                        CopiesSold = value.CopiesSold,
+                        Description = value.Description,
+                        Developer = value.Developer,
+                        DeveloperId = value.DeveloperId,
+                        Price = value.Price,
+                        Rating = value.Rating,
+                        Type = value.Type 
                     };
                     OnPropertyChanged();
                     (DeleteGameCommand as RelayCommand).NotifyCanExecuteChanged();
