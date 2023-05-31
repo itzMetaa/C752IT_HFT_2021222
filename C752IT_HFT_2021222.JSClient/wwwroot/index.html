@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <h1>Statistics</h1>
+    Average price of games:<label id="averagepriceofgameslabel"></label>$<br />
+
+    Most profitable game's revenue is:
+    <label id="mostprofitablegamerevenue"></label>$
+
     <h1>Game Catalogue</h1>
 
     <div id="formdiv">
@@ -36,6 +42,62 @@
         <tbody id="resultarea">
         </tbody>
     </table>
+
+    <h1>Developer Catalogue</h1>
+
+    <div id="formdiv">
+        <label>Developer name</label>
+        <input type="text" id="devname" />
+        <button type="button" onclick="createdev()">Create developer</button>
+    </div>
+
+    <div id="updateformdevdiv">
+        <label>Developer name</label>
+        <input type="text" id="devnametoupdate" />
+        <label>Team size</label>
+        <input type="text" id="devteamsizetoupdate" />
+        <button type="button" onclick="updatedev()">Update developer</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Team size</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultareadevs">
+        </tbody>
+    </table>
+
+    <h1>Publisher Catalogue</h1>
+
+    <div id="formdiv">
+        <label>Publisher name</label>
+        <input type="text" id="publishername" />
+        <button type="button" onclick="createpub()">Create developer</button>
+    </div>
+
+    <div id="updateformdivpub">
+        <label>Game title</label>
+        <input type="text" id="publishernametoupdate" />
+        <button type="button" onclick="updatepub()">Update developer</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultareapublishers">
+        </tbody>
+    </table>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>
 

@@ -40,6 +40,34 @@ th{
     font-weight: bolder;
 }
 
+#updateformdivpub {
+    display: none;
+    flex-direction: column;
+}
+
+#updateformdivpub label, button, input{
+    margin: 10px;
+    padding: 5px;
+}
+
+#updateformdivpub label {
+    font-weight: bolder;
+}
+
+#updateformdevdiv {
+    display: none;
+    flex-direction: column;
+}
+
+#updateformdevdiv label, button, input {
+    margin: 10px;
+    padding: 5px;
+}
+
+#updateformdevdiv label {
+    font-weight: bolder;
+}
+
 table button{
     padding: 2px;
 }
