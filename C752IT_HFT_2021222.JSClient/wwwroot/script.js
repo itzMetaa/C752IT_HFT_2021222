@@ -59,6 +59,14 @@ function setupSignalR() {
         getdata();
     });
 
+    connection.on("GetGamesOfPublisher", (user, message) => {
+        getdata();
+    });
+    connection.on("GetGamesOfDevelopers", (user, message) => {
+        getdata();
+    });
+
+
     connection.onclose(async () => {
         await start();
     });
@@ -157,10 +165,33 @@ function display() {
     document.getElementById('resultareapublishers').innerHTML = "";
     publishers.forEach(t => {
         document.getElementById('resultareapublishers').innerHTML +=
-            "<tr><td>" + t.id + "</td><td>" + t.name + "</td><td>" + `<button type="button" onclick="removepub(${t.id})">Delete</button>` + `<button type="button" onclick="showupdatepub(${t.id})">Update</button>` + "</td></tr>"
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td><td>" + `<button type="button" onclick="removepub(${t.id})">Delete</button>` + `<button type="button" onclick="showupdatepub(${t.id})">Update</button>` + `<button type="button" onclick="showpubgames(${t.id})">List games</button>` + "</td></tr>"
         //console.log(t.name);
     });
+
+    if (publisheridtoupdate>0) {
+        
+
+        document.getElementById('resultareaofpubs').innerHTML = "";
+        console.log(gamesofpublisher);
+        gamesofpublisher.forEach(t => {
+            document.getElementById('resultareaofpubs').innerHTML +=
+                "<tr><td>" + t.id + "</td><td>" + t.title + "</td><td>" + t.price + "</td><td>" + t.rating + "</td><td>" + t.copiesSold + "</td><td>" + t.price * t.copiesSold + "$</td><td>" + t.type + "</td><td>" + t.description + "</td></tr>"
+        });
+    }
 }
+
+function showpubgames(id) {
+    document.getElementById('pubgames').style.display = 'flex';
+    publisheridtoupdate = id;
+    fetch('http://localhost:54503/stat/getgamesofpublisher/' + publisheridtoupdate)
+        .then(x => x.json())
+        .then(y => {
+            gamesofpublisher = y;
+        })
+    display();
+}
+
 
 function showupdate(id) {
     document.getElementById('gametitletoupdate').value = games.find(t => t['id'] == id)['title'];

@@ -71,3 +71,8 @@ th{
 table button{
     padding: 2px;
 }
+
+#pubgames {
+    display: none;
+    margin: 10px;
+}
