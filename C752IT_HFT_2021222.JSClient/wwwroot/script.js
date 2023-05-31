@@ -59,6 +59,20 @@ function setupSignalR() {
         getdata();
     });
 
+    connection.on("Stat1", (user, message) => {
+        getdata();
+    });
+    connection.on("Stat2", (user, message) => {
+        getdata();
+    });
+    connection.on("Stat3", (user, message) => {
+        getdata();
+    });
+    connection.on("Stat4", (user, message) => {
+        getdata();
+    });
+
+
     connection.onclose(async () => {
         await start();
     });
@@ -100,30 +114,30 @@ async function getdata() {
     });
 
     await fetch('http://localhost:54503/stat/mostprofitablegame')
-        .then(x => x.json())
-        .then(y => {
-            mostprofitablegame = y;
-            display();
-        });
+    .then(x => x.json())
+    .then(y => {
+        mostprofitablegame = y;
+        display();
+    });
 
     await fetch('http://localhost:54503/stat/gamerevenueinfo')
-        .then(x => x.json())
-        .then(y => {
-            gamerevenueinfo = y;
-            display();
-        });
+    .then(x => x.json())
+    .then(y => {
+        gamerevenueinfo = y;
+        display();
+    });
     await fetch('http://localhost:54503/stat/averagepriceofgames')
-        .then(x => x.json())
-        .then(y => {
-            averagepriceofgames = y;
-            display();
-        });
+    .then(x => x.json())
+    .then(y => {
+        averagepriceofgames = y;
+        display();
+    });
     await fetch('http://localhost:54503/stat/numberofgamespertype')
-        .then(x => x.json())
-        .then(y => {
-            numberofgamespertype = y;
-            display();
-        });
+    .then(x => x.json())
+    .then(y => {
+        numberofgamespertype = y;
+        display();
+    });
 }
 
 function display() {
@@ -160,6 +174,11 @@ function display() {
 
 function showupdate(id) {
     document.getElementById('gametitletoupdate').value = games.find(t => t['id'] == id)['title'];
+    document.getElementById('gamepricetoupdate').value = games.find(t => t['id'] == id)['price'];
+    document.getElementById('gameratingtoupdate').value = games.find(t => t['id'] == id)['rating'];
+    document.getElementById('gamecopiestoupdate').value = games.find(t => t['id'] == id)['copiesSold'];
+    document.getElementById('gamedesctoupdate').value = games.find(t => t['id'] == id)['description'];
+    document.getElementById('gamedevidtoupdate').value = games.find(t => t['id'] == id)['developerId'];
     document.getElementById('updateformdiv').style.display = 'flex';
     gameidtoupdate = id;
 }
@@ -232,13 +251,20 @@ function createpub() {
 function update() {
     document.getElementById('updateformdiv').style.display = 'none';
     let gametitle = document.getElementById('gametitletoupdate').value;
+    let gprice = document.getElementById('gamepricetoupdate').value;
+    let grating = document.getElementById('gameratingtoupdate').value;
+    let copis = document.getElementById('gamecopiestoupdate').value;
+    let desc = document.getElementById('gamedesctoupdate').value;
+    let devid = document.getElementById('gamedevidtoupdate').value;
     fetch('http://localhost:54503/game', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(
-            { title: gametitle, id: gameidtoupdate }),
+            {
+                title: gametitle, id: gameidtoupdate, price: gprice, rating: grating, copiesSold: copis, description: desc, developerId: devid
+            }),
     })
         .then(response => response)
         .then(data => {
