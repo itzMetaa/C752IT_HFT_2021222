@@ -6,9 +6,38 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <h1>Game Catalogue</h1>
 
+    <div id="formdiv">
+        <label>Game title</label>
+        <input type="text" id="gametitle" />
+        <button type="button" onclick="create()">Create game</button>
+    </div>
 
+    <div id="updateformdiv">
+        <label>Game title</label>
+        <input type="text" id="gametitletoupdate" />
+        <button type="button" onclick="update()">Update game</button>
+    </div>
 
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Copies sold</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>
