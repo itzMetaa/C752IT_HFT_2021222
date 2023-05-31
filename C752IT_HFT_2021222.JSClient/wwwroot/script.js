@@ -59,20 +59,6 @@ function setupSignalR() {
         getdata();
     });
 
-    connection.on("Stat1", (user, message) => {
-        getdata();
-    });
-    connection.on("Stat2", (user, message) => {
-        getdata();
-    });
-    connection.on("Stat3", (user, message) => {
-        getdata();
-    });
-    connection.on("Stat4", (user, message) => {
-        getdata();
-    });
-
-
     connection.onclose(async () => {
         await start();
     });
@@ -145,14 +131,18 @@ function display() {
     document.getElementById('averagepriceofgameslabel').innerHTML += "" + averagepriceofgames;
 
     document.getElementById('mostprofitablegamerevenue').innerHTML = "";
-    document.getElementById('mostprofitablegamerevenue').innerHTML += "" + mostprofitablegame.totalRevenue; 
+    document.getElementById('mostprofitablegamerevenue').innerHTML += "" + "x" + " with " + mostprofitablegame.totalRevenue;
 
+    if (mostprofitablegame && mostprofitablegame.game) {
+        document.getElementById('mostprofitablegamerevenue').innerHTML = "";
+        document.getElementById('mostprofitablegamerevenue').innerHTML += "" + mostprofitablegame.game.title + " with " + mostprofitablegame.totalRevenue;
+    }
 
     //console.log('******GAMES******')
     document.getElementById('resultarea').innerHTML = "";
     games.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
-            "<tr><td>" + t.id + "</td><td>" + t.title + "</td><td>" + t.price + "</td><td>" + t.rating + "</td><td>" + t.copiesSold + "</td><td>" + t.type + "</td><td>" + t.description + "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` + `<button type="button" onclick="showupdate(${t.id})">Update</button>` + "</td></tr>"
+            "<tr><td>" + t.id + "</td><td>" + t.title + "</td><td>" + t.price + "</td><td>" + t.rating + "</td><td>" + t.copiesSold + "</td><td>" + t.price * t.copiesSold + "$</td><td>" + t.type + "</td><td>" + t.description + "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` + `<button type="button" onclick="showupdate(${t.id})">Update</button>` + "</td></tr>"
         //console.log(t.title);
     });
     //console.log('******DEVELOPERS******')
