@@ -193,6 +193,24 @@ function create() {
         .catch((error) => Console.error('Error: ', error));
 }
 
+function createdev() {
+    let devname = document.getElementById('devname').value;
+    fetch('http://localhost:54503/developer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            { name: devname }),
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => Console.error('Error: ', error));
+}
+
 function createpub() {
     let pubname = document.getElementById('publishername').value;
     fetch('http://localhost:54503/publisher', {
