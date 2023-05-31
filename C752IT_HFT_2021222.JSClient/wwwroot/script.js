@@ -157,7 +157,7 @@ function display() {
     document.getElementById('resultareadevs').innerHTML = "";
     developers.forEach(t => {
         document.getElementById('resultareadevs').innerHTML +=
-            "<tr><td>" + t.id + "</td><td>" + t.name + "</td><td>" + t.teamSize + "</td><td>" + `<button type="button" onclick="removedev(${t.id})">Delete</button>` + `<button type="button" onclick="showupdatedev(${t.id})">Update</button>` + "</td></tr>"
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td><td>" + t.teamSize + "</td><td>" + `<button type="button" onclick="removedev(${t.id})">Delete</button>` + `<button type="button" onclick="showupdatedev(${t.id})">Update</button>` + `<button type="button" onclick="showdevgames(${t.id})">List games</button>` + "</td></tr>"
         //console.log(t.name);
     });
 
@@ -173,9 +173,18 @@ function display() {
         
 
         document.getElementById('resultareaofpubs').innerHTML = "";
-        console.log(gamesofpublisher);
         gamesofpublisher.forEach(t => {
             document.getElementById('resultareaofpubs').innerHTML +=
+                "<tr><td>" + t.id + "</td><td>" + t.title + "</td><td>" + t.price + "</td><td>" + t.rating + "</td><td>" + t.copiesSold + "</td><td>" + t.price * t.copiesSold + "$</td><td>" + t.type + "</td><td>" + t.description + "</td></tr>"
+        });
+    }
+
+    if (devidtoupdate > 0) {
+
+
+        document.getElementById('resultareaofdevs').innerHTML = "";
+        gamesofdeveloper.forEach(t => {
+            document.getElementById('resultareaofdevs').innerHTML +=
                 "<tr><td>" + t.id + "</td><td>" + t.title + "</td><td>" + t.price + "</td><td>" + t.rating + "</td><td>" + t.copiesSold + "</td><td>" + t.price * t.copiesSold + "$</td><td>" + t.type + "</td><td>" + t.description + "</td></tr>"
         });
     }
@@ -188,6 +197,17 @@ function showpubgames(id) {
         .then(x => x.json())
         .then(y => {
             gamesofpublisher = y;
+        })
+    display();
+}
+
+function showdevgames(id) {
+    document.getElementById('devgames').style.display = 'flex';
+    devidtoupdate = id;
+    fetch('http://localhost:54503/stat/getgamesofdevelopers/' + devidtoupdate)
+        .then(x => x.json())
+        .then(y => {
+            gamesofdeveloper = y;
         })
     display();
 }
