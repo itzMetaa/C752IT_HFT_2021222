@@ -1,3 +1,6 @@
+2024.04.24 - 23:20
+Public-ra átállítottam, hogy munkakeresési referencia lehessen a repository
+
 2023.05.31 - 21:29
 final version pushed yey
 
